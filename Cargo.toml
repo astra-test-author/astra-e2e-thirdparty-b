@@ -1,0 +1,16 @@
+[package]
+name = "dice_roller"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# One dependency, on purpose. tokio, serde, serde_json, anyhow, async-trait and
+# schemars all arrive through `astra_plugin_sdk::prelude`, and every path the
+# macros expand to is `::astra_plugin_sdk::…`, so nothing here compiles by
+# accident off a crate that is no longer listed.
+#
+# 0.6 is the first release whose `HostClient` attaches `x-session-token`. Against
+# anything older the daemon answers `unauthenticated` to every host call this
+# plugin makes — it would start, serve its hooks, and silently fail to fire a
+# single trigger.
+astra-plugin-sdk = "0.7"
